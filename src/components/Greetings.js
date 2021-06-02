@@ -43,6 +43,7 @@ const Container = styled.View`
 
 const Name = styled.Text`
   font-size: 40px;
+  color: #061649;
 `;
 const Greet = styled.Text`
   font-size: 20px;

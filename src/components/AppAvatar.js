@@ -11,7 +11,7 @@ const AppAvatar = (props) => {
 };
 export default AppAvatar;
 
-const Container = styled.View`
+const Container = styled.TouchableOpacity`
   width: 70px;
   height: 70px;
   border-radius: 35px;
