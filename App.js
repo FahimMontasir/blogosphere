@@ -1,8 +1,8 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import HomeScreen from "./src/screens/home.screen";
+import LoginScreen from "./src/screens/login.screen";
+import ReadingScreen from "./src/screens/reading.screen";
 
-const App = () => <HomeScreen />;
+const App = () => <LoginScreen />;
 
 export default App;

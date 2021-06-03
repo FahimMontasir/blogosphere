@@ -1,31 +1,32 @@
 import React from "react";
-import { ImageBackground, Text, TouchableOpacity } from "react-native";
 import { Avatar, Chip } from "react-native-paper";
 import styled from "styled-components/native";
-import AppAvatar from "../AppAvatar";
 
 const Card = ({
-  cardUri = "https://i.ibb.co/xSDmhFv/programmer.jpg",
+  uri = "https://i.ibb.co/xSDmhFv/programmer.jpg",
   name = "Fahim Montasir",
   personUri = "https://i.ibb.co/xSDmhFv/programmer.jpg",
+  headline = "10 awesome thing about javascript",
+  tag = "javascript",
 }) => {
   return (
     <Container>
-      <BackgroundImgContainer source={{ uri: cardUri }}>
+      <BackgroundImgContainer source={{ uri }}>
         <Profile
           avatar={<Avatar.Image size={24} source={{ uri: personUri }} />}
         >
           {name}
         </Profile>
-        <Headline numberOfLines={2}>
-          Build a Creative Mind Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Unde, temporibus.
-        </Headline>
+        <HeadlineContainer>
+          <Headline numberOfLines={2}>{headline}</Headline>
+          <Tag numberOfLines={1}>#{tag}</Tag>
+        </HeadlineContainer>
       </BackgroundImgContainer>
     </Container>
   );
 };
 export default Card;
+
 const Container = styled.TouchableOpacity`
   height: 320px;
   width: 320px;
@@ -40,14 +41,22 @@ const BackgroundImgContainer = styled.ImageBackground`
 `;
 const Profile = styled(Chip)`
   width: 50%;
-  margin-top: 30px;
-  margin-left: 10px;
+  top: 20px;
+  left: 150px;
 `;
 const Headline = styled.Text`
   color: white;
   font-size: 25px;
   font-weight: bold;
-  margin-top: 120px;
+`;
+const HeadlineContainer = styled.View`
+  margin-top: 150px;
   padding: 5px;
   background-color: rgba(0, 0, 0, 0.3);
+`;
+const Tag = styled.Text`
+  font-size: 17px;
+  color: yellow;
+  padding-top: 10px;
+  padding-bottom: 60px;
 `;
