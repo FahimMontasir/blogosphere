@@ -3,14 +3,23 @@ import React, { useState } from "react";
 import { Button, TextInput } from "react-native-paper";
 import styled from "styled-components/native";
 
-const LoginScreen = () => {
+const RegisterScreen = () => {
+  const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   return (
-    <ContainerImage source={require("../../assets/login.jpg")}>
+    <ContainerImage source={require("../../assets/register.jpg")}>
       <InputContainer>
-        <Welcome>Welcome Blogger!</Welcome>
-        <MuteText>Sign in to continue</MuteText>
+        <Welcome>Create an account</Welcome>
+        <MuteText>Start blogging with us!</MuteText>
+        <Input
+          value={name}
+          autoCompleteType="name"
+          label="Name"
+          mode="outlined"
+          left={<Input.Icon name="email" />}
+          onChangeText={(text) => setName(text)}
+        />
         <Input
           value={email}
           autoCapitalize="none"
@@ -29,18 +38,23 @@ const LoginScreen = () => {
           left={<Input.Icon name="lock" />}
           onChangeText={(text) => setPassword(text)}
         />
-        <AppButton mode="contained" onPress={() => console.log("Pressed")}>
-          Sign In
-        </AppButton>
-        <AppButton mode="outlined" onPress={() => console.log("Pressed")}>
+        <AppButton
+          color="purple"
+          mode="contained"
+          onPress={() => console.log("Pressed")}
+        >
           Sign Up
         </AppButton>
+        <TextContainer>
+          <MuteText>Already have an account?</MuteText>
+          <Button onPress={() => console.log("Pressed")}>Sign In</Button>
+        </TextContainer>
       </InputContainer>
       <StatusBar translucent />
     </ContainerImage>
   );
 };
-export default LoginScreen;
+export default RegisterScreen;
 
 const ContainerImage = styled.ImageBackground`
   width: 100%;
@@ -68,4 +82,9 @@ const AppButton = styled(Button)`
   margin-top: 20px;
   height: 50px;
   justify-content: center;
+`;
+const TextContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
 `;
