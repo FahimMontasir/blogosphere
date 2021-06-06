@@ -32,5 +32,5 @@ const MuteText = styled.Text`
   color: gray;
   font-size: 17px;
   position: absolute;
-  bottom: 440px;
+  bottom: 400px;
 `;

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button, TextInput } from "react-native-paper";
 import styled from "styled-components/native";
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   return (
@@ -32,7 +32,10 @@ const LoginScreen = () => {
         <AppButton mode="contained" onPress={() => console.log("Pressed")}>
           Sign In
         </AppButton>
-        <AppButton mode="outlined" onPress={() => console.log("Pressed")}>
+        <AppButton
+          mode="outlined"
+          onPress={() => navigation.navigate("SignUp")}
+        >
           Sign Up
         </AppButton>
       </InputContainer>

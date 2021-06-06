@@ -1,15 +1,14 @@
 import React from "react";
-import { Text } from "react-native";
 import styled from "styled-components/native";
 import Card from "./Card";
 import Category from "./Category";
 
-const Blogs = (props) => {
+const Blogs = ({ navigation }) => {
   return (
     <Container>
       <Title>Blogs</Title>
       <Category />
-      <Card />
+      <Card onPress={() => navigation.navigate("Reading")} />
     </Container>
   );
 };

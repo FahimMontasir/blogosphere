@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button, TextInput } from "react-native-paper";
 import styled from "styled-components/native";
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
@@ -47,7 +47,7 @@ const RegisterScreen = () => {
         </AppButton>
         <TextContainer>
           <MuteText>Already have an account?</MuteText>
-          <Button onPress={() => console.log("Pressed")}>Sign In</Button>
+          <Button onPress={() => navigation.navigate("SignIn")}>Sign In</Button>
         </TextContainer>
       </InputContainer>
       <StatusBar translucent />

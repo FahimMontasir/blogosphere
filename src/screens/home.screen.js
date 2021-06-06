@@ -7,7 +7,7 @@ import Greetings from "../components/Greetings";
 import SafeArea from "../components/SafeArea";
 import Score from "../components/Score";
 
-const HomeScreen = (props) => {
+const HomeScreen = ({ navigation }) => {
   return (
     <SafeArea>
       <Container>
@@ -16,7 +16,7 @@ const HomeScreen = (props) => {
           <Score />
         </Header>
         <Greetings />
-        <Blogs />
+        <Blogs navigation={navigation} />
         <StatusBar style="auto" backgroundColor="#fffff2" />
       </Container>
     </SafeArea>

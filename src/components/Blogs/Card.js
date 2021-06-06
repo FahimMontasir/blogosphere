@@ -8,9 +8,10 @@ const Card = ({
   personUri = "https://i.ibb.co/xSDmhFv/programmer.jpg",
   headline = "10 awesome thing about javascript",
   tag = "javascript",
+  onPress,
 }) => {
   return (
-    <Container>
+    <Container onPress={onPress}>
       <BackgroundImgContainer source={{ uri }}>
         <Profile
           avatar={<Avatar.Image size={24} source={{ uri: personUri }} />}
@@ -30,7 +31,7 @@ export default Card;
 const Container = styled.TouchableOpacity`
   height: 320px;
   width: 320px;
-  border-radius: 50px;
+  border-radius: 30px;
   overflow: hidden;
   elevation: 5;
   margin: 5px;

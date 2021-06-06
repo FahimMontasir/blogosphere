@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 import SafeArea from "../components/SafeArea";
 import LottieView from "lottie-react-native";
 
-const BookMarkScreen = (props) => {
+const BookMarkScreen = () => {
   return (
     <SafeArea>
       <Container>
