@@ -1,12 +1,16 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, TextInput } from "react-native-paper";
 import styled from "styled-components/native";
+import ErrorMessage from "../components/ErrorMessage";
+import { UserContext } from "../services/userData";
 
 const RegisterScreen = ({ navigation }) => {
-  const [name, setName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { error, setError, onCreateUser } = useContext(UserContext);
+
   return (
     <ContainerImage source={require("../../assets/register.jpg")}>
       <InputContainer>
@@ -17,7 +21,7 @@ const RegisterScreen = ({ navigation }) => {
           autoCompleteType="name"
           label="Name"
           mode="outlined"
-          left={<Input.Icon name="email" />}
+          left={<Input.Icon name="account" />}
           onChangeText={(text) => setName(text)}
         />
         <Input
@@ -38,16 +42,24 @@ const RegisterScreen = ({ navigation }) => {
           left={<Input.Icon name="lock" />}
           onChangeText={(text) => setPassword(text)}
         />
+        <ErrorMessage error={error} />
         <AppButton
           color="purple"
           mode="contained"
-          onPress={() => console.log("Pressed")}
+          onPress={() => onCreateUser(name, email, password)}
         >
           Sign Up
         </AppButton>
         <TextContainer>
           <MuteText>Already have an account?</MuteText>
-          <Button onPress={() => navigation.navigate("SignIn")}>Sign In</Button>
+          <Button
+            onPress={() => {
+              navigation.navigate("SignIn");
+              setError(null);
+            }}
+          >
+            Sign In
+          </Button>
         </TextContainer>
       </InputContainer>
       <StatusBar translucent />

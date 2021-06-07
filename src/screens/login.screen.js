@@ -1,11 +1,15 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, TextInput } from "react-native-paper";
 import styled from "styled-components/native";
+import ErrorMessage from "../components/ErrorMessage";
+import { UserContext } from "../services/userData";
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { error, setError, onSignInUser } = useContext(UserContext);
+
   return (
     <ContainerImage source={require("../../assets/login.jpg")}>
       <InputContainer>
@@ -29,12 +33,19 @@ const LoginScreen = ({ navigation }) => {
           left={<Input.Icon name="lock" />}
           onChangeText={(text) => setPassword(text)}
         />
-        <AppButton mode="contained" onPress={() => console.log("Pressed")}>
+        <ErrorMessage error={error} />
+        <AppButton
+          mode="contained"
+          onPress={() => onSignInUser(email, password)}
+        >
           Sign In
         </AppButton>
         <AppButton
           mode="outlined"
-          onPress={() => navigation.navigate("SignUp")}
+          onPress={() => {
+            navigation.navigate("SignUp");
+            setError(null);
+          }}
         >
           Sign Up
         </AppButton>

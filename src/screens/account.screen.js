@@ -1,19 +1,21 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useContext } from "react";
 import { Avatar, Button, Subheading, Title } from "react-native-paper";
 import styled from "styled-components/native";
 import SafeArea from "../components/SafeArea";
+import { UserContext } from "../services/userData";
 
-const AccountScreen = (props) => {
+const AccountScreen = () => {
+  const { userData, onSignOutUser } = useContext(UserContext);
   return (
     <SafeArea>
       <Container>
         <Profile>
-          <Avatar.Image size={150} source={require("../../assets/star.png")} />
+          <Avatar.Image size={150} source={{ uri: userData.photoURL }} />
         </Profile>
-        <Title>Fahim Montasir</Title>
-        <Subheading>fahimmontasirshakil@gam.com</Subheading>
-        <Button onPress={() => console.log("logout")} color="tomato">
+        <Title>{userData.displayName}</Title>
+        <Subheading>{userData.email}</Subheading>
+        <Button onPress={() => onSignOutUser()} color="tomato">
           Log Out
         </Button>
         <StatusBar style="auto" />
@@ -26,6 +28,7 @@ export default AccountScreen;
 const Container = styled.View`
   flex: 1;
   align-items: center;
+  padding-top: 20px;
 `;
 const Profile = styled.View`
   width: 160px;

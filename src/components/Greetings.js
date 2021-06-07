@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
-const Greetings = ({ name = "Fahim" }) => {
+const Greetings = ({ name }) => {
   const [greet, setGreet] = useState(null);
   const [imgUri, setImgUri] = useState(null);
   const time = new Date().getHours();

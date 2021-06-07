@@ -2,10 +2,14 @@ import React from "react";
 import styled from "styled-components/native";
 import { Avatar } from "react-native-paper";
 
-const AppAvatar = (props) => {
+const AppAvatar = ({ imageUri, onPress }) => {
   return (
-    <Container>
-      <Avatar.Image size={50} source={require("../../assets/star.png")} />
+    <Container onPress={onPress}>
+      <Avatar.Image
+        style={{ backgroundColor: "white" }}
+        size={50}
+        source={{ uri: imageUri }}
+      />
     </Container>
   );
 };
