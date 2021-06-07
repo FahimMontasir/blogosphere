@@ -43,7 +43,7 @@ const CreatePostScreen = (props) => {
             numberOfLines={10}
             onChangeText={(text) => setDescription(text)}
           />
-          <AppButton mode="contained" onPress={() => console.log("Pressed")}>
+          <AppButton mode="contained" onPress={() => console.log("pressed")}>
             Post
           </AppButton>
           <StatusBar style="auto" />

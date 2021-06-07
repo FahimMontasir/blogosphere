@@ -1,12 +1,9 @@
 import React from "react";
 import styled from "styled-components/native";
 
-const Category = ({
-  categoryName = "JavaScript",
-  categoryUri = "https://i.ibb.co/0JmLjZ4/javascript.png",
-}) => {
+const Category = ({ categoryName, categoryUri, onPress }) => {
   return (
-    <Container>
+    <Container onPress={onPress}>
       <IconContainer>
         <Icon source={{ uri: categoryUri }} />
       </IconContainer>
@@ -25,8 +22,7 @@ const Container = styled.TouchableOpacity`
   justify-content: space-between;
   border-radius: 50px;
   elevation: 5;
-  margin-right: 5px;
-  margin-bottom: 10px;
+  margin: 10px 5px;
 `;
 const Caption = styled.Text`
   font-size: 18px;

@@ -8,7 +8,7 @@ const Greetings = ({ name = "Fahim" }) => {
   const time = new Date().getHours();
 
   useEffect(() => {
-    if (time > 5 && time < 12) {
+    if (time > 4 && time < 12) {
       setGreet("Good Morning");
       setImgUri("https://i.ibb.co/5nv6pzk/sun.png");
     } else if (time >= 12 && time < 15) {
@@ -17,7 +17,7 @@ const Greetings = ({ name = "Fahim" }) => {
     } else if (time >= 15 && time < 21) {
       setGreet("Good Evening");
       setImgUri("https://i.ibb.co/h12LsMQ/night.png");
-    } else if (time >= 21) {
+    } else if (time <= 4 || time >= 21) {
       setGreet("Good Night");
       setImgUri("https://i.ibb.co/h12LsMQ/night.png");
     }

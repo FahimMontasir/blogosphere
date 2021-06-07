@@ -6,7 +6,7 @@ import LoginRoute from "./LoginRoute";
 const Routes = () => {
   return (
     <NavigationContainer>
-      <LoginRoute />
+      <AppRoute />
     </NavigationContainer>
   );
 };

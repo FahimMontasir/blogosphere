@@ -28,13 +28,16 @@ const Card = ({
 };
 export default Card;
 
-const Container = styled.TouchableOpacity`
+const Container = styled.TouchableHighlight.attrs({
+  activeOpacity: 0.9,
+  underlayColor: "purple",
+})`
   height: 320px;
   width: 320px;
   border-radius: 30px;
   overflow: hidden;
   elevation: 5;
-  margin: 5px;
+  margin: 18px;
 `;
 const BackgroundImgContainer = styled.ImageBackground`
   height: 320px;
