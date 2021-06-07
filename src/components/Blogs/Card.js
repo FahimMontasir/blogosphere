@@ -2,25 +2,17 @@ import React from "react";
 import { Avatar, Chip } from "react-native-paper";
 import styled from "styled-components/native";
 
-const Card = ({
-  uri = "https://i.ibb.co/xSDmhFv/programmer.jpg",
-  name = "Fahim Montasir",
-  personUri = "https://i.ibb.co/xSDmhFv/programmer.jpg",
-  headline = "10 awesome thing about javascript",
-  tag = "javascript",
-  onPress,
-}) => {
+const Card = ({ item, onPress }) => {
+  const { blogImageUrl, category, title, photoURL, displayName } = item;
   return (
     <Container onPress={onPress}>
-      <BackgroundImgContainer source={{ uri }}>
-        <Profile
-          avatar={<Avatar.Image size={24} source={{ uri: personUri }} />}
-        >
-          {name}
+      <BackgroundImgContainer source={{ uri: blogImageUrl }}>
+        <Profile avatar={<Avatar.Image size={24} source={{ uri: photoURL }} />}>
+          {displayName}
         </Profile>
         <HeadlineContainer>
-          <Headline numberOfLines={2}>{headline}</Headline>
-          <Tag numberOfLines={1}>#{tag}</Tag>
+          <Headline numberOfLines={2}>{title}</Headline>
+          <Tag numberOfLines={1}>#{category}</Tag>
         </HeadlineContainer>
       </BackgroundImgContainer>
     </Container>

@@ -1,15 +1,41 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Headline, Subheading, TextInput } from "react-native-paper";
 import styled from "styled-components/native";
 import SafeArea from "../components/SafeArea";
 import { Picker } from "@react-native-picker/picker";
 import { KeyboardAvoidingView, Platform } from "react-native";
+import { BlogContext } from "../services/BlogData";
+import { UserContext } from "../services/userData";
 
-const CreatePostScreen = (props) => {
-  const [title, setTitle] = useState(null);
-  const [description, setDescription] = useState(null);
+const CreatePostScreen = ({ navigation }) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [category, setCategory] = useState("JavaScript");
+  const { onPostBlog, isSuccess, setIsSuccess } = useContext(BlogContext);
+  const { userData } = useContext(UserContext);
+  const { displayName, email, photoURL } = userData;
+  if (isSuccess) {
+    return (
+      <SafeArea>
+        <Container>
+          <SuccessText>Your post was successful</SuccessText>
+          <AppButton
+            mode="outlined"
+            onPress={() => {
+              setIsSuccess(false);
+              setTitle("");
+              setDescription("");
+              navigation.navigate("CreatePost");
+            }}
+          >
+            write a new blog
+          </AppButton>
+          <StatusBar style="auto" />
+        </Container>
+      </SafeArea>
+    );
+  }
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "android" ? "padding" : "height"}
@@ -43,7 +69,19 @@ const CreatePostScreen = (props) => {
             numberOfLines={10}
             onChangeText={(text) => setDescription(text)}
           />
-          <AppButton mode="contained" onPress={() => console.log("pressed")}>
+          <AppButton
+            mode="contained"
+            onPress={() =>
+              onPostBlog(
+                title,
+                category,
+                description,
+                displayName,
+                email,
+                photoURL
+              )
+            }
+          >
             Post
           </AppButton>
           <StatusBar style="auto" />
@@ -74,4 +112,9 @@ const AppButton = styled(Button)`
   margin-top: 20px;
   height: 50px;
   justify-content: center;
+`;
+const SuccessText = styled.Text`
+  color: green;
+  font-size: 25px;
+  text-align: center;
 `;

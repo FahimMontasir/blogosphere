@@ -1,23 +1,77 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
+import { Alert } from "react-native";
+import { db } from "../firebase/firebaseInit";
 import { blogImageUrl } from "../mockData";
 
-blogImageUrl[Math.floor(Math.random() * 8)];
-const BlogContext = createContext();
+export const BlogContext = createContext();
 const BlogContextProvider = ({ children }) => {
-  const postBlog = () => {
-    db.collection("users")
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [allBlogs, setAllBlogs] = useState([]);
+  //post data to firebase
+  const postBlog = (
+    title,
+    category,
+    description,
+    displayName,
+    email,
+    photoURL
+  ) => {
+    db.collection("blogs")
       .add({
-        first: "Ada",
-        last: "Lovelace",
-        born: 1815,
+        blogImageUrl: blogImageUrl[Math.floor(Math.random() * 8)],
+        title,
+        category,
+        description,
+        displayName,
+        email,
+        photoURL,
       })
-      .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
+      .then(() => {
+        setIsSuccess(true);
       })
       .catch((error) => {
-        console.error("Error adding document: ", error);
+        Alert.alert("Error adding document: ", error);
       });
   };
-  return <BlogContext.Provider value={{}}>{children}</BlogContext.Provider>;
+  //get data
+  const getAllBlogs = () => {
+    db.collection("blogs")
+      .get()
+      .then((snapshot) => {
+        const blogs = [];
+        snapshot.docs.map((doc) =>
+          blogs.unshift({ ...doc.data(), id: doc.id })
+        );
+        setAllBlogs(blogs);
+      })
+      .catch((err) => Alert.alert("didn't get data", err));
+  };
+  //filtering
+  const getBlogsByCategory = (cat) => {
+    db.collection("blogs")
+      .where("category", "==", cat)
+      .get()
+      .then((snapshot) => {
+        const specificBlogs = [];
+        snapshot.docs.map((doc) =>
+          specificBlogs.push({ ...doc.data(), id: doc.id })
+        );
+        setAllBlogs(specificBlogs);
+      });
+  };
+  return (
+    <BlogContext.Provider
+      value={{
+        onPostBlog: postBlog,
+        isSuccess,
+        setIsSuccess,
+        getAllBlogs,
+        allBlogs,
+        getBlogsByCategory,
+      }}
+    >
+      {children}
+    </BlogContext.Provider>
+  );
 };
 export default BlogContextProvider;

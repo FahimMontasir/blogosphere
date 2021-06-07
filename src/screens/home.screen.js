@@ -19,7 +19,7 @@ const HomeScreen = ({ navigation }) => {
           />
           <Score />
         </Header>
-        <Greetings name={userData.displayName} />
+        <Greetings name={userData.displayName.substr(0, 8)} />
         <Blogs navigation={navigation} />
         <StatusBar style="auto" backgroundColor="#fffff2" />
       </Container>

@@ -3,29 +3,23 @@ import React from "react";
 import { Avatar, Chip, IconButton } from "react-native-paper";
 import styled from "styled-components/native";
 
-const ReadingScreen = ({
-  uri = "https://i.ibb.co/xSDmhFv/programmer.jpg",
-  personUri = "https://i.ibb.co/xSDmhFv/programmer.jpg",
-  name = "Fahim Montasir",
-  headline = "10 awesome thing about javascript",
-  description = "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur facere id modi animi dolorem architecto laudantium commodi, nulla excepturi impedit natus libero dignissimos voluptatum earum atque? Culpa modi autem possimus vero praesentium mollitia dolorem ipsam velit ex, vel sint voluptates fugiat amet tempore, laborum, veritatis quisquam minus explicabo temporibus ratione. Obcaecati repellendus distinctio, voluptatibus iure facere numquam ipsam reprehenderit corrupti accusantium? Reprehenderit eveniet odit odio. Eos reprehenderit vero ratione aut modi in consectetur dolor minus temporibus quibusdam voluptate, veniam debitis animi minima ab fuga perferendis? Ducimus facere aut officiis nulla minima aperiam minus ut aliquid, consequuntur itaque dicta veritatis nemo, suscipit corrupti at ipsum! Id ea ad magni quasi unde consequatur modi quis reprehenderit, hic labore eveniet facilis provident minima laborum deserunt accusamus dolore aliquam eum repellendus illo distinctio asperiores ratione veniam ipsam! Quae voluptatum quaerat neque quam quos sapiente amet voluptates aperiam ipsam, illo repudiandae dolorum voluptate placeat tempore. Sequi inventore molestias animi unde eum hic, voluptatibus laboriosam dignissimos eveniet, expedita facere blanditiis voluptate excepturi delectus nisi. Temporibus magni totam, enim voluptatum eius sed optio magnam! Facere sequi id libero sunt, aliquam necessitatibus maiores ratione aspernatur cum perferendis omnis, reiciendis soluta? Reprehenderit cumque vero autem dolor maxime nulla minima!",
-}) => {
+const ReadingScreen = ({ route }) => {
+  const { blogImageUrl, title, description, photoURL, displayName } =
+    route.params.item;
   return (
     <Container>
-      <LongImage source={{ uri }} />
-      <Headline>{headline}</Headline>
+      <LongImage source={{ uri: blogImageUrl }} />
+      <Headline>{title}</Headline>
       <Line />
       <UserInfoContainer>
-        <Profile
-          avatar={<Avatar.Image size={24} source={{ uri: personUri }} />}
-        >
-          {name}
+        <Profile avatar={<Avatar.Image size={24} source={{ uri: photoURL }} />}>
+          {displayName}
         </Profile>
         <IconButton
           icon="account-multiple-plus"
           color={"tomato"}
           size={30}
-          onPress={() => console.log("follow")}
+          onPress={() => alert("Started following")}
         />
       </UserInfoContainer>
       <BodyText>{description}</BodyText>
